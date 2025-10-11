@@ -1,4 +1,4 @@
-print'''Programming Set 3
+'''Programming Set 3
 
 This assignment will develop your ability to manipulate data.
 '''
@@ -38,8 +38,17 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
-
+    followed_by = social_graph[to_member]["following"]
+    follows = social_graph[from_member]["following"]
+    
+    if to_member in follows and from_member in followed_by:
+        return "friends"
+    elif to_member in follows:
+        return "follower"
+    elif from_member in followed_by:
+        return "followed by"
+    else:
+        return "no relationship"
 
 def tic_tac_toe(board):
     '''Tic Tac Toe.
@@ -64,9 +73,36 @@ def tic_tac_toe(board):
     str
         the symbol of the winner or "NO WINNER" if there is no winner
     '''
+    
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    left_diagonal =[board[i][i] for i in range(len(board))]
+    right_diagonal = [board[i][len(board)-1-i] for i in range(len(board))]
+
+    for row in board:
+        if all(cell == 'X' for cell in row):
+            return 'X'
+        elif all(cell == 'O' for cell in row):
+            return 'O'
+    for i in range(len(board)):
+        column = [row[i] for row in board]
+        if all(cell == 'X' for cell in column):
+            return 'X'
+        elif all(cell == 'O' for cell in column):
+            return 'O'
+            
+    if all(cell == 'X' for cell in left_diagonal):
+        return 'X'
+    elif all(cell == 'O' for cell in left_diagonal):
+        return 'O'
+    
+    if all(cell == 'X' for cell in right_diagonal):
+        return 'X'
+    elif all(cell == 'O' for cell in right_diagonal):
+        return 'O'
+    
+    else:
+        return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -98,4 +134,18 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    total_time = 0
+    current_stop = first_stop
+
+    while current_stop != second_stop:
+        for (start, end), data in route_map.items():
+            if start == current_stop:
+                total_time += data["travel_time_mins"]
+                current_stop = end
+                break  
+    return total_time
+
+
+
+
+
