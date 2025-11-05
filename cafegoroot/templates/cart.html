@@ -1,0 +1,20 @@
+<h1>CafeGo</h1>
+
+<p>Welcome, {{ .User.Username }}!</p>
+
+<a href="/">Back to home page</a>
+
+<h2>My Cart</h2>
+
+{{ if .CartItems }}
+<ul>
+    {{ range $ci := .CartItems }}
+        <li>{{ $ci.Quantity }} - {{ $ci.ProductName }}</li>
+    {{ end }}
+</ul>
+<form action="" method="post">
+    <input type="submit" value="Checkout">
+</form>
+{{ else }}
+<p>Your cart is empty.</p>
+{{ end }}
